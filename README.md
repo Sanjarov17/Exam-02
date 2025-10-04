@@ -408,3 +408,180 @@ students2 = [
 ]
 find_shortest_name_student(students2)  # {'name': 'Jo', 'age': 19}
 ```
+
+
+
+
+
+
+
+
+
+# Exam 02 Solutions
+
+# ---------------- Masala 1 ----------------
+def calculate(num1: float, num2: float, operator: str) -> float:
+    try:
+        if operator == "+":
+            return round(num1 + num2, 2)
+        elif operator == "-":
+            return round(num1 - num2, 2)
+        elif operator == "*":
+            return round(num1 * num2, 2)
+        elif operator == "/":
+            if num2 == 0:
+                return "Error: Nolga bo'lish mumkin emas"
+            return round(num1 / num2, 2)
+        else:
+            return "Error: Noto'g'ri operator"
+    except Exception as e:
+        return f"Error: {e}"
+
+
+# ---------------- Masala 2 ----------------
+def atm_operation(balance: int, action: str, amount: int) -> dict:
+    if amount < 0:
+        return {"error": "Manfiy summa kiritish mumkin emas"}
+    if action == "deposit":
+        balance += amount
+    elif action == "withdraw":
+        if amount > balance:
+            return {"error": "Balans yetarli emas"}
+        balance -= amount
+    else:
+        return {"error": "Noto‘g‘ri amal"}
+    return {"balance": balance}
+
+
+# ---------------- Masala 3 ----------------
+def calculate_tax(salary: int) -> dict:
+    if salary <= 5_000_000:
+        rate = 0
+    elif salary <= 10_000_000:
+        rate = 12
+    elif salary <= 20_000_000:
+        rate = 18
+    else:
+        rate = 25
+    tax = salary * rate // 100
+    net = salary - tax
+    return {"gross": salary, "tax": tax, "net": net, "rate": f"{rate}%"}
+
+
+# ---------------- Masala 4 ----------------
+def format_name(full_name: str) -> str:
+    parts = full_name.split()
+    family, rest = parts[0], " ".join(parts[1:])
+    return f"{rest}, {family}"
+
+
+# ---------------- Masala 5 ----------------
+def count_words(text: str) -> dict:
+    words = text.lower().split()
+    result = {}
+    for w in words:
+        result[w] = result.get(w, 0) + 1
+    return result
+
+
+# ---------------- Masala 6 ----------------
+def analyze_grades(students: dict) -> dict:
+    avg = sum(students.values()) / len(students)
+    above = [name for name, grade in students.items() if grade > avg]
+    return {"average": round(avg, 2), "above_average": above}
+
+
+# ---------------- Masala 7 ----------------
+def calculate_cart(cart: dict) -> int:
+    return sum(item["price"] * item["quantity"] for item in cart.values())
+
+
+# ---------------- Masala 8 ----------------
+def calculate_stats(numbers: list) -> dict:
+    s = sum(numbers)
+    avg = round(s / len(numbers), 2) if numbers else 0
+    return {"sum": s, "average": avg}
+
+
+# ---------------- Masala 9 ----------------
+def find_min_max(numbers: list) -> dict:
+    return {"max": max(numbers), "min": min(numbers)}
+
+
+# ---------------- Masala 10 ----------------
+def sort_numbers(numbers: list, reverse: bool = False) -> list:
+    return sorted(numbers, reverse=reverse)
+
+
+# ---------------- Masala 11 ----------------
+from collections import Counter
+def analyze_list(items: list) -> dict:
+    total = len(items)
+    counts = Counter(items)
+    unique = len(counts)
+    duplicates = [k for k, v in counts.items() if v > 1]
+    most_common = counts.most_common(1)[0][0]
+    return {
+        "total": total,
+        "unique": unique,
+        "duplicates": duplicates,
+        "most_common": most_common
+    }
+
+
+# ---------------- Masala 12 ----------------
+def sort_names(students: list) -> list:
+    return sorted(students, key=lambda x: x.lower())
+
+
+# ---------------- Masala 13 ----------------
+def filter_long_names(students: list, min_length: int = 5) -> list:
+    return [name for name in students if len(name) >= min_length]
+
+
+# ---------------- Masala 14 ----------------
+def find_pattern(items: list, pattern: str, match_type: str) -> list:
+    pattern = pattern.lower()
+    result = []
+    for item in items:
+        low = item.lower()
+        if match_type == "starts" and low.startswith(pattern):
+            result.append(item)
+        elif match_type == "ends" and low.endswith(pattern):
+            result.append(item)
+        elif match_type == "contains" and pattern in low:
+            result.append(item)
+    return result
+
+
+# ---------------- Masala 15 ----------------
+def find_top_students(grades: dict) -> dict:
+    max_grade = max(grades.values())
+    tops = [name for name, grade in grades.items() if grade == max_grade]
+    return {"max_grade": max_grade, "students": tops}
+
+
+# ---------------- Masala 16 ----------------
+def count_by_grade(grades: dict, target_grade: int) -> dict:
+    selected = [name for name, grade in grades.items() if grade == target_grade]
+    return {"count": len(selected), "students": selected}
+
+
+# ---------------- Masala 17 ----------------
+def filter_positive(numbers: list) -> list:
+    return [d for d in numbers if d["value"] > 0]
+
+
+# ---------------- Masala 18 ----------------
+def square_values(numbers: list) -> list:
+    return [{"value": d["value"] ** 2} for d in numbers]
+
+
+# ---------------- Masala 19 ----------------
+def find_longest_name(names: list) -> str:
+    return max(names, key=len)
+
+
+# ---------------- Masala 20 ----------------
+def find_shortest_name_student(students: list) -> dict:
+    return min(students, key=lambda s: len(s["name"]))
